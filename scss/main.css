@@ -147,4 +147,80 @@ ul {
             .container .authentication .signin-page form .forget-pass {
               font-size: 12px; } }
 
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  background-color: #eee;
+  padding-left: 30px;
+  padding-right: 30px; }
+  header .logo {
+    width: 200px;
+    background-color: #0674e5;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 25px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #fff; }
+    header .logo span {
+      color: #eee; }
+  header button {
+    width: 80px;
+    background-color: #fff;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 15px;
+    font-size: 15px;
+    color: black;
+    border: none;
+    cursor: pointer; }
+
+.container .products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 30px;
+  padding-top: 50px; }
+  .container .products .product {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #eee;
+    padding: 10px 10px;
+    border-radius: 15px;
+    cursor: pointer; }
+    .container .products .product .favorite {
+      width: 190px;
+      display: flex;
+      justify-content: flex-end; }
+      .container .products .product .favorite svg.unlike {
+        color: #eee; }
+      .container .products .product .favorite svg.like {
+        color: red; }
+    .container .products .product .picture {
+      width: 150px;
+      height: 200px;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+      padding: 2px;
+      overflow: hidden; }
+      .container .products .product .picture img {
+        width: 100%;
+        height: 100%; }
+    .container .products .product .title {
+      margin-top: 10px;
+      text-transform: capitalize;
+      text-align: center;
+      border-bottom: 3px solid #eee;
+      padding-bottom: 10px; }
+    .container .products .product .price {
+      color: #0674e5;
+      margin-top: 10px;
+      width: 60%;
+      text-align: center;
+      font-weight: bold; }
+
 /*# sourceMappingURL=main.css.map */

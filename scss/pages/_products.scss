@@ -1,0 +1,105 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    background-color: #eee;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    .logo {
+        width: 200px;
+        background-color: $color2;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        border-radius: 25px;
+        font-size: 25px;
+        font-weight: bold;
+        color: $fontColor1;
+
+        span {
+            color: $fontColor3;
+        }
+    }
+
+    button {
+        width: 80px;
+        background-color: $fontColor1;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        border-radius: 15px;
+        font-size: 15px;
+        color: black;
+        border: none;
+        cursor: pointer;
+    }
+}
+
+.container {
+    .products {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 30px;
+        padding-top: 50px;
+
+        .product {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid $fontColor3;
+            padding: 10px 10px;
+            border-radius: 15px;
+            cursor: pointer;
+
+            .favorite {
+                width: 190px;
+                display: flex;
+                justify-content: flex-end;
+
+                svg {
+                    &.unlike {
+                        color: $fontColor3;
+                    }
+
+                    &.like {
+                        color: red;
+                    }
+                }
+            }
+
+            .picture {
+                width: 150px;
+                height: 200px;
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+                padding: 2px;
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+
+
+            .title {
+                margin-top: 10px;
+                text-transform: capitalize;
+                text-align: center;
+                border-bottom: 3px solid $fontColor3;
+                padding-bottom: 10px;
+            }
+
+            .price {
+                color: $color2;
+                margin-top: 10px;
+                width: 60%;
+                text-align: center;
+                font-weight: bold;
+            }
+        }
+    }
+}

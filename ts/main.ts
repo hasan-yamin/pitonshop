@@ -1,13 +1,37 @@
-
-/* *********** Start try auto login ************/
-let userId: string,
-    userAuth: string;
+ 
+ /* *********** Start try auto login ************/
+let userAuth: string;
 window.addEventListener("load", async () => {
-    if (userAuth !== null && userAuth !== '' && userId !== null && userId !== '') {
-        window.location.href = "products.html";
+    if (userAuth !== null && userAuth !== '' ) {
+        // window.location.href = "products.html";
     }
-    // let phone: HTMLFormElement | null = <HTMLFormElement>document.getElementById('phone');
-    // (new phoneMask()).init(phone);
+    let phone: HTMLFormElement = <HTMLFormElement>document.getElementById('phone');
+    phone.addEventListener("input", (e) => {
+        const value = phone.value.replace(/\D+/g, "");
+        const numberLength = 11;
+        let result = "+";
+        for (let i = 0; i < value.length && i < numberLength; i++) {
+            switch (i) {
+                case 0:
+                    result += "9 (";
+                    continue;
+                case 4:
+                    result += ") ";
+                    break;
+                case 7:
+                    result += "-";
+                    break;
+                case 9:
+                    result += "-";
+                    break;
+                default:
+                    break;
+            }
+            // console.log(' value[',i,']: ',value[i])
+            result += value[i];
+        }
+        phone.value = result;
+    });
 });
 /* *********** End auto login **************/
 
@@ -29,7 +53,7 @@ if (signupForm !== null) {
                         if (mail.length > 4 && mail.includes('@')) {
                             if (pass.length >= 6 && pass.length <= 20 && confirmpassword === pass) {
                                 try {
-                                    await signup(mail, pass, userName)
+                                    signup(mail, pass, userName)
                                     // hide signup page
                                     let signupPage: HTMLDivElement | null = <HTMLDivElement>document.getElementById('signup-page');
                                     signupPage.classList.remove('show')
@@ -44,6 +68,7 @@ if (signupForm !== null) {
                                     let ErrorMsg: HTMLDivElement | null = <HTMLDivElement>document.getElementById('error-signup');
                                     ErrorMsg.innerHTML = err + '';
                                     ErrorMsg.style.display = 'block'
+                                    console.log('signup error: ',err )
                                 }
                             } else {
                                 //show error message
@@ -92,8 +117,8 @@ if (loginForm !== null) {
             if (mail.length > 4 && mail.includes('@')) {
                 if (pass.length >= 6 && pass.length <= 20) {
                     try {
-                        await signin(mail, pass)
-                        window.location.href = "products.html";
+                        signin(mail, pass)
+                        // window.location.href = "products.html";
                     } catch (err) {
                         //Show error message
                         let ErrorMsg: HTMLDivElement | null = <HTMLDivElement>document.getElementById('error-login');
@@ -118,50 +143,47 @@ if (loginForm !== null) {
 /* *********** End login **************/
 
 /* *********** [1] SignUp **************/
-async function signup(email: string, pass: string, userName: string) {
-    const response = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAfYekGDygrowGsMxPxNceLWY2535bT8yo", {
-        method: 'POST',
-        body: JSON.stringify({
-            email: email,
+  function signup(email: string, pass: string, userName: string) { 
+    axios({
+        method: 'post',
+         url: 'https://assignment-api.piton.com.tr/api/v1/user/register',
+         data: {
+            name: userName,
             password: pass,
-            returnSecureToken: true,
+            email: email
+        }
+    }).then(function (response: { data: { [x: string]: any; }; }) {
+              console.log('token : ',response.data['token']); 
+              userAuth=response.data['token']
         })
-    });
-    const responseData = await response.json();
-    if (!response.ok) {
-        const error = new Error(responseData.error.message || 'Signup Error');
-        throw error
-    }
-}
+        .catch(function (error: any) {
+            console.log(error);
+        });
+ } 
 /* *********** End Signup **************/
 /* *********** [2] SignIn **************/
-async function signin(email: string, pass: string) {
-    const response = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAfYekGDygrowGsMxPxNceLWY2535bT8yo", {
-        method: 'POST',
-        body: JSON.stringify({
-            email: email,
-            password: pass,
-            returnSecureToken: true,
+  function signin(email: string, pass: string) {
+    axios({
+        method: 'post',
+         url: 'https://assignment-api.piton.com.tr/api/v1/user/login',
+         data: {
+             password: pass,
+            email: email
+        }
+    }).then(function (response: { data: { [x: string]: string; }; } ) { 
+                    console.log('data : ',response.data['token']); 
+                    userAuth=response.data['token']
+                    window.location.href = "products.html";
+                    let rememberme: HTMLInputElement | null = <HTMLInputElement>document.getElementById('rememberme');
+                    if (rememberme.checked) {
+                        localStorage.setItem('userAuth', userAuth);
+                    } 
         })
-    });
-    const responseData = await response.json();
-    if (!response.ok) {
-        const error = new Error(responseData.error.message || 'Signin Error');
-        throw error
-    }
-    userId = responseData.localId;
-    userAuth = responseData.idToken;
-    let rememberme: HTMLInputElement | null = <HTMLInputElement>document.getElementById('rememberme');
-    console.log('rememberme:  ', rememberme.checked)
-    if (rememberme.checked) {
-        // store session in local storage to auto login
-        localStorage.setItem('userId', userId);
-        localStorage.setItem('userAuth', userAuth);
-    }
-}
-/* *********** end SignIn **************/
-
-// window.onload = function () {
+        .catch(function (error: any) {
+            console.log(error);
+        });
+}  
+/* *********** end SignIn **************/ 
 //     MaskedInput({
 //         elm: document.getElementById('phone'), // select only by id
 //         format: '+375 (__) ___-__-__',
