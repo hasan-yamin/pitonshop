@@ -6,13 +6,71 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PitonShope</title>
+    <!-- fontawsome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <!-- my main css file -->
     <link rel="stylesheet" href="scss/main.css">
 </head>
 
 <body>
+    <!-- Authentication -->
+    <div class="container">
+        <section class="authentication">
+            <div class="info">
+                <h2>PitonShope</h2>
+                <p>the most popular book shop for IT</p>
+            </div>
+            <!-- SignUp Page -->
+            <div class="signup-page">
+                <h2>Hello!</h2>
+                <p>Sign Up to Get Started</p>
+                <form class="signup-form">
+                    <div class="form-control">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" name="nam" id="nam" placeholder="Full Name">
+                    </div>
+                    <div class="form-control">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" name="email" id="signup-email" placeholder="Email Address">
+                    </div>
+                    <div class="form-control">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" name="password" id="password" placeholder="Password">
+                    </div>
+                    <div class="error" id="error">Error</div>
+                    <button type="submit">Register</button>
+                </form>
 
-    <h1>Wellcome!!</h1>
+            </div>
+            <!-- End SignUp Page -->
+            <!-- SignIn Page -->
+            <div class="signin-page show ">
+                <h2>Hello Again!</h2>
+                <p>Welcome Back</p>
+                <form class="signin-form">
+                    <div class="form-control">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" name="email" id="signup-email" placeholder="Email Address">
+                    </div>
+                    <div class="form-control">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" name="password" id="password" placeholder="Password">
+                    </div>
+                    <div class="error" id="error">Error</div>
+                    <button type="submit">Login</button>
+                    <span class="forget-pass" id="forget-pass">forgot password</span>
+                </form>
+
+            </div>
+            <!-- End SignIn Page -->
+        </section>
+    </div>
+
+    <!-- End Authentication -->
+
+
+    <!-- fontawsome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js"></script>
     <!-- my main js file -->
     <script src="dist/main.js"></script>
 </body>

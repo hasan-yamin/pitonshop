@@ -1,9 +1,15 @@
-// import global rules
+// impoer global rules
 @import './layout/global_rules';
-// global variables
-@import './variables/vars';
-@import './helpers/media-queries';
 
-.container {
-    margin: auto;
-}
+@import './variables/vars'; // global variable
+
+@import './pages/auth';
+
+// @import './helpers/media-queries';
+// @import './pages/title';
+// @import './pages/settings';
+// @import './pages/addCard';
+// @import './pages/noTask';
+// @import './pages/filter';
+// @import './pages/editContent';
+// @import './pages/list';
