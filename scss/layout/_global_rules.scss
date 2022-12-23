@@ -1,0 +1,43 @@
+@import '../helpers/media-queries';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif, Arial, Helvetica;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  @include breakpoint(xs) {
+    width: 95%;
+  }
+
+  @include breakpoint(sm) {
+    width: 540px;
+  }
+
+  @include breakpoint(md) {
+    width: 720px;
+  }
+
+  @include breakpoint(lg) {
+    width: 960px;
+  }
+
+  @include breakpoint(xl) {
+    width: 1140px;
+  }
+
+  @include breakpoint(xxl) {
+    width: 1320px;
+  }
+}

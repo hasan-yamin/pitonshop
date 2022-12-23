@@ -1,0 +1,9 @@
+// import global rules
+@import './layout/global_rules';
+// global variables
+@import './variables/vars';
+@import './helpers/media-queries';
+
+.container {
+    margin: auto;
+}
