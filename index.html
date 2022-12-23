@@ -21,48 +21,66 @@
                 <p>the most popular book shop for IT</p>
             </div>
             <!-- SignUp Page -->
-            <div class="signup-page">
+            <div class="signup-page  show" id="signup-page">
                 <h2>Hello!</h2>
                 <p>Sign Up to Get Started</p>
-                <form class="signup-form">
+                <form class="signup-form" id="signup-form">
                     <div class="form-control">
                         <i class="fa-solid fa-user"></i>
-                        <input type="text" name="nam" id="nam" placeholder="Full Name">
+                        <input type="text" name="nam" id="nam" placeholder="First Name" required>
+                    </div>
+                    <div class="form-control">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" name="sername" id="sername" placeholder="Family Name" required>
+                    </div>
+                    <div class="form-control">
+                        <i class="fa-solid fa-phone"></i>
+                        <input type="text" name="phone" id="phone" placeholder="+90 505 888-88-88"
+                            pattern="\+90\s5[0-9]{2}\s[0-9]{3}-?[0-9]{2}-?[0-9]{2}" required>
                     </div>
                     <div class="form-control">
                         <i class="fa-regular fa-envelope"></i>
-                        <input type="email" name="email" id="signup-email" placeholder="Email Address">
+                        <input type="email" name="email" id="signup-email" placeholder="Email Address" required>
                     </div>
                     <div class="form-control">
                         <i class="fa-solid fa-lock"></i>
-                        <input type="password" name="password" id="password" placeholder="Password">
+                        <input type="password" name="password" id="password" placeholder="Password" required>
                     </div>
-                    <div class="error" id="error">Error</div>
+                    <div class="form-control">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" name="confirmpassword" id="confirmpassword" placeholder="Password"
+                            required>
+                    </div>
+                    <div class="error" id="error-signup">Error</div>
                     <button type="submit">Register</button>
                 </form>
-
             </div>
             <!-- End SignUp Page -->
             <!-- SignIn Page -->
-            <div class="signin-page show ">
+            <div class="signin-page" id="signin-page">
                 <h2>Hello Again!</h2>
                 <p>Welcome Back</p>
-                <form class="signin-form">
+                <form class="signin-form" id="login-form">
                     <div class="form-control">
                         <i class="fa-regular fa-envelope"></i>
-                        <input type="email" name="email" id="signup-email" placeholder="Email Address">
+                        <input type="email" name="email" id="signup-email" placeholder="Email Address" required>
                     </div>
                     <div class="form-control">
                         <i class="fa-solid fa-lock"></i>
-                        <input type="password" name="password" id="password" placeholder="Password">
+                        <input type="password" name="password" id="password" placeholder="Password" required>
                     </div>
-                    <div class="error" id="error">Error</div>
+                    <div class="error" id="error-login">Error</div>
                     <button type="submit">Login</button>
+                    <div class="rememberme">
+                        <input type="checkbox" name="rememberme" id="rememberme">
+                        <label for="rememberme">Remember Me</label>
+                    </div>
                     <span class="forget-pass" id="forget-pass">forgot password</span>
                 </form>
 
             </div>
             <!-- End SignIn Page -->
+
         </section>
     </div>
 
@@ -71,6 +89,7 @@
 
     <!-- fontawsome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js"></script>
+    <script src="../src/phonemask.min.js"></script>
     <!-- my main js file -->
     <script src="dist/main.js"></script>
 </body>

@@ -112,7 +112,9 @@ ul {
         .container .authentication .signin-page form .error {
           width: 100%;
           color: red;
-          text-align: center; }
+          text-align: center;
+          display: none;
+          font-size: 13px; }
         .container .authentication .signup-page form button,
         .container .authentication .signin-page form button {
           height: 40px;
@@ -125,6 +127,10 @@ ul {
           text-transform: capitalize;
           letter-spacing: 1px;
           cursor: pointer; }
+        .container .authentication .signup-page form .rememberme,
+        .container .authentication .signin-page form .rememberme {
+          font-size: 12px;
+          margin-top: 6px; }
         .container .authentication .signup-page form .forget-pass,
         .container .authentication .signin-page form .forget-pass {
           align-self: center;
