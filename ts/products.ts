@@ -41,13 +41,6 @@ function getProducts() {
 function showProducts(products: any[]) {
     let productsDiv: HTMLDivElement = <HTMLDivElement>document.getElementById('products')
     products.forEach((product: any, index: number) => {
-        // console.log('product : ', index, '*************************************');
-        // console.log('id : ', product.id);
-        // console.log('name : ', product.name);
-        // console.log('price : ', product.price);
-        // console.log('image : ', product.image);
-        // console.log('description : ', product.description);
-        // console.log('likes : ', product.likes);
         let productDiv = document.createElement('div')
         productDiv.className = 'product'
         productDiv.setAttribute('id', `product-no-${product.id}`)
@@ -60,15 +53,14 @@ function showProducts(products: any[]) {
                 <div class="title">${product.name}</div>
                 <div class="price">${product.price}.00 &euro;</div> 
         `
+        productDiv.addEventListener('click', function () {
+            window.location.href = `product-details.html?id=${product.id}`;
+        })
         productsDiv.appendChild(productDiv)
     });
 }
 function like(id: number) {
     console.log('clicked on  : ', id);
-    let likeIcon: SVGElement = <SVGElement>document.querySelector(`#product-no-${id} .like`)
-    likeIcon.style.display = 'block'
-    let unlikeIcon: SVGElement = <SVGElement>document.querySelector(`#product-no-${id} .unlike`)
-    unlikeIcon.style.display = 'none'
     axios({
         method: 'POST',
         url: 'https://assignment-api.piton.com.tr/api/v1/product/like',
@@ -80,15 +72,15 @@ function like(id: number) {
             productId: id
         }
     }).then(function (response: any) {
-        console.log('response : ', response);
+        console.log('response : ', response.data);
+        let likeIcon: SVGElement = <SVGElement>document.querySelector(`#product-no-${id} .like`)
+        likeIcon.style.display = 'block'
+        let unlikeIcon: SVGElement = <SVGElement>document.querySelector(`#product-no-${id} .unlike`)
+        unlikeIcon.style.display = 'none'
     })
 }
 function unLike(id: number) {
     console.log('clicked on  : ', id);
-    let likeIcon: SVGElement = <SVGElement>document.querySelector(`#product-no-${id} .like`)
-    likeIcon.style.display = 'none'
-    let unlikeIcon: SVGElement = <SVGElement>document.querySelector(`#product-no-${id} .unlike`)
-    unlikeIcon.style.display = 'block'
     axios({
         method: 'POST',
         url: 'https://assignment-api.piton.com.tr/api/v1/product/unlike',
@@ -100,6 +92,10 @@ function unLike(id: number) {
             productId: id
         }
     }).then(function (response: any) {
-        console.log('response : ', response);
+        console.log('response : ', response.data);
+        let likeIcon: SVGElement = <SVGElement>document.querySelector(`#product-no-${id} .like`)
+        likeIcon.style.display = 'none'
+        let unlikeIcon: SVGElement = <SVGElement>document.querySelector(`#product-no-${id} .unlike`)
+        unlikeIcon.style.display = 'block'
     })
 }

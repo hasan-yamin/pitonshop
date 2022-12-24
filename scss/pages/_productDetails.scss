@@ -1,0 +1,169 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    background-color: #eee;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    .logo {
+        width: 200px;
+        background-color: $color2;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        border-radius: 25px;
+        font-size: 25px;
+        font-weight: bold;
+        color: $fontColor1;
+cursor: pointer;
+        span {
+            color: $fontColor3;
+        }
+    }
+
+    button {
+        width: 80px;
+        background-color: $fontColor1;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        border-radius: 15px;
+        font-size: 15px;
+        color: black;
+        border: none;
+        cursor: pointer;
+    }
+}
+
+.container {
+
+    .product-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 2px solid $fontColor3;
+        padding: 20px 0px 20px 20px;
+        border-radius: 15px;
+        margin: 60px auto;
+
+        @include breakpoint(xs) {
+            width: 325px;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        @include breakpoint(sm) {
+            width: 540px;
+        }
+
+        @include breakpoint(md) {
+            width: 700px;
+        }
+
+        @include breakpoint(lg) {
+            width: 700px;
+        }
+
+        @include breakpoint(xl) {
+            width: 700px;
+        }
+
+        @include breakpoint(xxl) {
+            width: 800px;
+        }
+
+        .image {
+            width: 200px;
+            height: 300px;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+            padding: 2px;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .details {
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+
+            @include breakpoint(xs) {
+                width: 300px;
+            }
+
+            @include breakpoint(sm) {
+                width: 260px;
+            }
+
+            @include breakpoint(md) {
+                width: 420px;
+            }
+
+            @include breakpoint(lg) {
+                width: 420px;
+            }
+
+            @include breakpoint(xl) {
+                width: 420px;
+            }
+
+            @include breakpoint(xxl) {
+                width: 520px;
+            }
+
+            .favorite {
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+                padding-right: 20px;
+                font-size: 14px;
+
+                svg {
+                    &.like {
+                        margin-left: 5px;
+                        color: red;
+                    }
+                }
+            }
+
+            .title {
+                width: 90%;
+                margin-bottom: 10px;
+                margin-top: 10px;
+                text-align: left;
+                padding-right: 20px;
+                font-size: 25px;
+            }
+
+            .description {
+                text-align: left;
+                font-size: 15px;
+                padding-right: 30px;
+                line-height: 20px;
+                color: #333;
+            }
+
+            .price {
+                background-color: $color2;
+                color: $fontColor1;
+                margin-top: 10px;
+                width: 100px;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                font-weight: bold;
+                border-top-left-radius: 15px;
+                border-bottom-left-radius: 15px;
+                align-self: flex-end;
+                justify-self: flex-end;
+            }
+        }
+
+    }
+
+}

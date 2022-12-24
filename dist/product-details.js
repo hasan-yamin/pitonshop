@@ -1,0 +1,47 @@
+"use strict";
+let productId;
+let usertoken = localStorage.getItem('userAuth');
+window.addEventListener('load', function () {
+    productId = +window.location.href.slice(window.location.href.indexOf('?id=') + 4);
+    console.log('productId: ', productId);
+    getProductDetails(productId);
+});
+function getProductDetails(productId) {
+    axios({
+        method: 'GET',
+        url: `https://assignment-api.piton.com.tr/api/v1/product/get/${productId}`,
+        // responseType: 'stream',
+        headers: {
+            'access-token': usertoken
+        }
+    }).then(function (response) {
+        console.log('id : ', response.data['product'].id);
+        console.log('name : ', response.data['product'].name);
+        console.log('price : ', response.data['product'].price);
+        console.log('image : ', response.data['product'].image);
+        console.log('description : ', response.data['product'].description);
+        console.log('likes : ', response.data['product'].likes);
+        showProduct(response.data['product']);
+    });
+}
+function showProduct(product) {
+    let productDiv = document.getElementById('product-details');
+    let image = document.createElement('div');
+    image.className = 'image';
+    image.innerHTML = `<img src="https://assignment-api.piton.com.tr${product.image}" alt="">`;
+    productDiv.appendChild(image);
+    let details = document.createElement('div');
+    details.className = 'details';
+    details.innerHTML = `
+                        <div class="favorite">
+                        ${product.likes.length} likes <i class="fa-solid fa-heart like"></i>
+                        </div>
+                        <div class="title">${product.name}</div>
+                        <div class="description">${product.description}</div>
+                        <div class="price">${product.price}.00 &euro;</div>
+    `;
+    productDiv.append(details);
+}
+function mainPage() {
+    window.location.href = "products.html";
+}

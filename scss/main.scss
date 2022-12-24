@@ -1,15 +1,7 @@
-// impoer global rules
+// import global rules and variables
 @import './layout/global_rules';
-
-@import './variables/vars'; // global variable
-
+@import './variables/vars';
+// import pages style
 @import './pages/auth';
 @import './pages/products';
-// @import './helpers/media-queries';
-// @import './pages/title';
-// @import './pages/settings';
-// @import './pages/addCard';
-// @import './pages/noTask';
-// @import './pages/filter';
-// @import './pages/editContent';
- 
+@import './pages/productDetails';

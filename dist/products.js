@@ -39,13 +39,6 @@ function getProducts() {
 function showProducts(products) {
     let productsDiv = document.getElementById('products');
     products.forEach((product, index) => {
-        // console.log('product : ', index, '*************************************');
-        // console.log('id : ', product.id);
-        // console.log('name : ', product.name);
-        // console.log('price : ', product.price);
-        // console.log('image : ', product.image);
-        // console.log('description : ', product.description);
-        // console.log('likes : ', product.likes);
         let productDiv = document.createElement('div');
         productDiv.className = 'product';
         productDiv.setAttribute('id', `product-no-${product.id}`);
@@ -58,15 +51,14 @@ function showProducts(products) {
                 <div class="title">${product.name}</div>
                 <div class="price">${product.price}.00 &euro;</div> 
         `;
+        productDiv.addEventListener('click', function () {
+            window.location.href = `product-details.html?id=${product.id}`;
+        });
         productsDiv.appendChild(productDiv);
     });
 }
 function like(id) {
     console.log('clicked on  : ', id);
-    let likeIcon = document.querySelector(`#product-no-${id} .like`);
-    likeIcon.style.display = 'block';
-    let unlikeIcon = document.querySelector(`#product-no-${id} .unlike`);
-    unlikeIcon.style.display = 'none';
     axios({
         method: 'POST',
         url: 'https://assignment-api.piton.com.tr/api/v1/product/like',
@@ -78,15 +70,15 @@ function like(id) {
             productId: id
         }
     }).then(function (response) {
-        console.log('response : ', response);
+        console.log('response : ', response.data);
+        let likeIcon = document.querySelector(`#product-no-${id} .like`);
+        likeIcon.style.display = 'block';
+        let unlikeIcon = document.querySelector(`#product-no-${id} .unlike`);
+        unlikeIcon.style.display = 'none';
     });
 }
 function unLike(id) {
     console.log('clicked on  : ', id);
-    let likeIcon = document.querySelector(`#product-no-${id} .like`);
-    likeIcon.style.display = 'none';
-    let unlikeIcon = document.querySelector(`#product-no-${id} .unlike`);
-    unlikeIcon.style.display = 'block';
     axios({
         method: 'POST',
         url: 'https://assignment-api.piton.com.tr/api/v1/product/unlike',
@@ -98,7 +90,10 @@ function unLike(id) {
             productId: id
         }
     }).then(function (response) {
-        console.log('response : ', response);
+        console.log('response : ', response.data);
+        let likeIcon = document.querySelector(`#product-no-${id} .like`);
+        likeIcon.style.display = 'none';
+        let unlikeIcon = document.querySelector(`#product-no-${id} .unlike`);
+        unlikeIcon.style.display = 'block';
     });
 }
-//# sourceMappingURL=products.js.map
