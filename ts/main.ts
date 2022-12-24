@@ -1,9 +1,12 @@
  
  /* *********** Start try auto login ************/
-let userAuth: string;
+let userAuth: string=<string>localStorage.getItem('userAuth');
 window.addEventListener("load", async () => {
-    if (userAuth !== null && userAuth !== '' ) {
-        // window.location.href = "products.html";
+    console.log('userAuth',userAuth)
+    if (userAuth !== null&&  userAuth !== undefined && userAuth !== '' ) {
+        console.log('userAuth',userAuth)
+        localStorage.setItem('tempUserAuth', userAuth);
+        window.location.href = "products.html";
     }
     let phone: HTMLFormElement = <HTMLFormElement>document.getElementById('phone');
     phone.addEventListener("input", (e) => {
@@ -51,18 +54,19 @@ if (signupForm !== null) {
                 if (serName.length > 3) {
                     if (phone) {
                         if (mail.length > 4 && mail.includes('@')) {
-                            if (pass.length >= 6 && pass.length <= 20 && confirmpassword === pass) {
+                            let regEx = /^[0-9a-zA-Z]+$/;
+                            if (pass.length >= 6 && pass.length <= 20 && confirmpassword === pass && pass.match(regEx)) {
                                 try {
                                     signup(mail, pass, userName)
-                                    // hide signup page
-                                    let signupPage: HTMLDivElement | null = <HTMLDivElement>document.getElementById('signup-page');
-                                    signupPage.classList.remove('show')
-                                    // Show Signin Page
-                                    let loginPage: HTMLDivElement | null = <HTMLDivElement>document.getElementById('signin-page');
-                                    loginPage.classList.add('show')
-                                    //Hide error message
-                                    let ErrorMsg: HTMLDivElement | null = <HTMLDivElement>document.getElementById('error-signup');
-                                    ErrorMsg.style.display = 'none'
+                                    // // hide signup page
+                                    // let signupPage: HTMLDivElement | null = <HTMLDivElement>document.getElementById('signup-page');
+                                    // signupPage.classList.remove('show')
+                                    // // Show Signin Page
+                                    // let loginPage: HTMLDivElement | null = <HTMLDivElement>document.getElementById('signin-page');
+                                    // loginPage.classList.add('show')
+                                    // //Hide error message
+                                    // let ErrorMsg: HTMLDivElement | null = <HTMLDivElement>document.getElementById('error-signup');
+                                    // ErrorMsg.style.display = 'none'
                                 } catch (err) {
                                     //Show error message
                                     let ErrorMsg: HTMLDivElement | null = <HTMLDivElement>document.getElementById('error-signup');
@@ -73,7 +77,7 @@ if (signupForm !== null) {
                             } else {
                                 //show error message
                                 let ErrorMsg: HTMLDivElement | null = <HTMLDivElement>document.getElementById('error-signup');
-                                ErrorMsg.innerText = "Password length should be between 6-20 char "
+                                ErrorMsg.innerText = "Password length should be between 6-20 char, a-z,A-Z,0-9 "
                                 ErrorMsg.style.display = 'block'
                             }
                         } else {
@@ -141,7 +145,22 @@ if (loginForm !== null) {
     })
 }
 /* *********** End login **************/
-
+/****change sign page******/
+let toSignIn: HTMLSpanElement | null = <HTMLSpanElement>document.getElementById('to-sgnin');
+let toSignUp: HTMLSpanElement | null = <HTMLSpanElement>document.getElementById('to-sgnup');
+toSignIn.addEventListener('click',function(){
+    let signupPage: HTMLDivElement | null = <HTMLDivElement>document.getElementById('signup-page');
+    signupPage.classList.remove('show')
+    let loginPage: HTMLDivElement | null = <HTMLDivElement>document.getElementById('signin-page');
+    loginPage.classList.add('show')
+})
+toSignUp.addEventListener('click',function(){
+    let signupPage: HTMLDivElement | null = <HTMLDivElement>document.getElementById('signup-page');
+    signupPage.classList.add('show')
+    let loginPage: HTMLDivElement | null = <HTMLDivElement>document.getElementById('signin-page');
+    loginPage.classList.remove('show')
+})
+/****change sign page******/
 /* *********** [1] SignUp **************/
   function signup(email: string, pass: string, userName: string) { 
     axios({
@@ -155,6 +174,8 @@ if (loginForm !== null) {
     }).then(function (response: { data: { [x: string]: any; }; }) {
               console.log('token : ',response.data['token']); 
               userAuth=response.data['token']
+              window.location.href = "products.html";
+              localStorage.setItem('tempUserAuth', userAuth);
         })
         .catch(function (error: any) {
             console.log(error);
@@ -173,6 +194,7 @@ if (loginForm !== null) {
     }).then(function (response: { data: { [x: string]: string; }; } ) { 
                     console.log('data : ',response.data['token']); 
                     userAuth=response.data['token']
+                    localStorage.setItem('tempUserAuth', userAuth);
                     window.location.href = "products.html";
                     let rememberme: HTMLInputElement | null = <HTMLInputElement>document.getElementById('rememberme');
                     if (rememberme.checked) {

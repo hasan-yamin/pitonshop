@@ -1,10 +1,10 @@
 
 let productId: number;
-let usertoken = <string>localStorage.getItem('userAuth');
+let usertoken = <string>localStorage.getItem('tempUserAuth');
 window.addEventListener('load', function () {
     productId = +window.location.href.slice(window.location.href.indexOf('?id=') + 4)
     console.log('productId: ', productId);
-    getProductDetails(5)
+    getProductDetails(productId)
 });
 function getProductDetails(productId: number) {
     console.log('productId: ', productId);
@@ -55,7 +55,13 @@ let signOut: HTMLButtonElement = <HTMLButtonElement>document.getElementById('log
 signOut.addEventListener('click', function () {
     // delete session data from local storage
     localStorage.removeItem('userAuth');
+    localStorage.removeItem('tempUserAuth');
     console.log('logedout...')
     window.location.href = "index.html";
 })
 /* *********** End Logout **************/
+// remove temp UserAuth when close page
+window.addEventListener('beforeunload', (event) => {
+    console.log('beforeunload', event)
+    localStorage.removeItem('tempUserAuth');  
+});

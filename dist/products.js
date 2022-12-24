@@ -1,5 +1,5 @@
 "use strict";
-let token = localStorage.getItem('userAuth');
+let token = localStorage.getItem('tempUserAuth');
 let products = [];
 getProducts();
 /* *********** Start Logout **************/
@@ -7,6 +7,7 @@ let logOut = document.getElementById('logout');
 logOut.addEventListener('click', function () {
     // delete session data from local storage
     localStorage.removeItem('userAuth');
+    localStorage.removeItem('tempUserAuth');
     console.log('logedout...');
     window.location.href = "index.html";
 });
@@ -46,6 +47,7 @@ function showProducts(products) {
         let productImage = document.querySelector(`#product-no-${product.id} .picture`);
         productImage.addEventListener('click', function () {
             window.location.href = `product-details.html?id=${product.id}`;
+            localStorage.setItem('tempUserAuth', token);
         });
     });
 }
@@ -89,3 +91,8 @@ function unLike(id) {
         unlikeIcon.style.display = 'block';
     });
 }
+// remove temp UserAuth when close page
+window.addEventListener('beforeunload', (event) => {
+    console.log('beforeunload', event);
+    localStorage.removeItem('tempUserAuth');
+});

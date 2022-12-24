@@ -1,5 +1,5 @@
 
-let token: string = <string>localStorage.getItem('userAuth');
+let token: string = <string>localStorage.getItem('tempUserAuth');
 let products: any[] = []
 getProducts()
 
@@ -8,6 +8,7 @@ let logOut: HTMLButtonElement = <HTMLButtonElement>document.getElementById('logo
 logOut.addEventListener('click', function () {
     // delete session data from local storage
     localStorage.removeItem('userAuth');
+    localStorage.removeItem('tempUserAuth');
     console.log('logedout...')
     window.location.href = "index.html";
 })
@@ -45,9 +46,10 @@ function showProducts(products: any[]) {
                 <div class="price">${product.price}.00 &euro;</div> 
       `
         productsDiv.appendChild(productDiv)
-        let productImage:HTMLDivElement=<HTMLDivElement>document.querySelector(`#product-no-${product.id} .picture`)
+        let productImage: HTMLDivElement = <HTMLDivElement>document.querySelector(`#product-no-${product.id} .picture`)
         productImage.addEventListener('click', function () {
             window.location.href = `product-details.html?id=${product.id}`;
+            localStorage.setItem('tempUserAuth', token);
         })
     });
 }
@@ -91,3 +93,9 @@ function unLike(id: number) {
         unlikeIcon.style.display = 'block'
     })
 }
+
+// remove temp UserAuth when close page
+window.addEventListener('beforeunload', (event) => {
+    console.log('beforeunload', event)
+    localStorage.removeItem('tempUserAuth');  
+});

@@ -1,10 +1,10 @@
 "use strict";
 let productId;
-let usertoken = localStorage.getItem('userAuth');
+let usertoken = localStorage.getItem('tempUserAuth');
 window.addEventListener('load', function () {
     productId = +window.location.href.slice(window.location.href.indexOf('?id=') + 4);
     console.log('productId: ', productId);
-    getProductDetails(5);
+    getProductDetails(productId);
 });
 function getProductDetails(productId) {
     console.log('productId: ', productId);
@@ -51,7 +51,13 @@ let signOut = document.getElementById('logout');
 signOut.addEventListener('click', function () {
     // delete session data from local storage
     localStorage.removeItem('userAuth');
+    localStorage.removeItem('tempUserAuth');
     console.log('logedout...');
     window.location.href = "index.html";
 });
-/* *********** End Logout **************/ 
+/* *********** End Logout **************/
+// remove temp UserAuth when close page
+window.addEventListener('beforeunload', (event) => {
+    console.log('beforeunload', event);
+    localStorage.removeItem('tempUserAuth');
+});

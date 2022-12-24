@@ -79,7 +79,8 @@
 
                 @include breakpoint(xs) {
                     width: 65%;
-                } 
+                }
+
                 .form-control {
                     display: flex;
                     justify-content: flex-start;
@@ -127,6 +128,16 @@
                 .rememberme {
                     font-size: 12px;
                     margin-top: 6px;
+
+                }
+
+                .or-sign {
+                    float: right;
+                    color: $color2;
+                    font-weight: bold;
+                    cursor: pointer;
+                    text-align: right;
+                    font-size: 12px;
                 }
 
                 .forget-pass {

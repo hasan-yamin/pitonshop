@@ -141,6 +141,14 @@ ul {
         .container .authentication .signin-page form .rememberme {
           font-size: 12px;
           margin-top: 6px; }
+        .container .authentication .signup-page form .or-sign,
+        .container .authentication .signin-page form .or-sign {
+          float: right;
+          color: #0674e5;
+          font-weight: bold;
+          cursor: pointer;
+          text-align: right;
+          font-size: 12px; }
         .container .authentication .signup-page form .forget-pass,
         .container .authentication .signin-page form .forget-pass {
           align-self: center;
