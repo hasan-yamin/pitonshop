@@ -45,6 +45,7 @@ function showProduct(product) {
 }
 function mainPage() {
     window.location.href = "products.html";
+    localStorage.setItem('tempUserAuth', usertoken);
 }
 /* *********** Start Logout **************/
 let signOut = document.getElementById('logout');

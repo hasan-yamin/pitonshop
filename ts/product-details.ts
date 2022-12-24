@@ -48,6 +48,7 @@ function showProduct(product: { image: string; likes: any; name: any; descriptio
 }
 function mainPage() {
     window.location.href = "products.html";
+    localStorage.setItem('tempUserAuth', usertoken);
 }
 
 /* *********** Start Logout **************/
