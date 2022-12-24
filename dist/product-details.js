@@ -4,9 +4,10 @@ let usertoken = localStorage.getItem('userAuth');
 window.addEventListener('load', function () {
     productId = +window.location.href.slice(window.location.href.indexOf('?id=') + 4);
     console.log('productId: ', productId);
-    getProductDetails(productId);
+    getProductDetails(5);
 });
 function getProductDetails(productId) {
+    console.log('productId: ', productId);
     axios({
         method: 'GET',
         url: `https://assignment-api.piton.com.tr/api/v1/product/get/${productId}`,
@@ -16,11 +17,11 @@ function getProductDetails(productId) {
         }
     }).then(function (response) {
         console.log('id : ', response.data['product'].id);
-        console.log('name : ', response.data['product'].name);
-        console.log('price : ', response.data['product'].price);
-        console.log('image : ', response.data['product'].image);
-        console.log('description : ', response.data['product'].description);
-        console.log('likes : ', response.data['product'].likes);
+        // console.log('name : ', response.data['product'].name);
+        // console.log('price : ', response.data['product'].price);
+        // console.log('image : ', response.data['product'].image);
+        // console.log('description : ', response.data['product'].description);
+        // console.log('likes : ', response.data['product'].likes);
         showProduct(response.data['product']);
     });
 }
@@ -45,3 +46,12 @@ function showProduct(product) {
 function mainPage() {
     window.location.href = "products.html";
 }
+/* *********** Start Logout **************/
+let signOut = document.getElementById('logout');
+signOut.addEventListener('click', function () {
+    // delete session data from local storage
+    localStorage.removeItem('userAuth');
+    console.log('logedout...');
+    window.location.href = "index.html";
+});
+/* *********** End Logout **************/ 

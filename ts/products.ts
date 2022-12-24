@@ -12,7 +12,6 @@ logOut.addEventListener('click', function () {
     window.location.href = "index.html";
 })
 /* *********** End Logout **************/
-/* [1] 'GET' get all tasks from firebase db */
 function getProducts() {
     axios({
         method: 'GET',
@@ -23,14 +22,6 @@ function getProducts() {
         }
     }).then(function (response: any) {
         products = response.data['products']
-        // console.log('response : ', response);
-        // console.log('data : ', response.data['products'][0]);
-        // console.log('id : ', response.data['products'][0].id);
-        // console.log('name : ', response.data['products'][0].name);
-        // console.log('price : ', response.data['products'][0].price);
-        // console.log('image : ', response.data['products'][0].image);
-        // console.log('description : ', response.data['products'][0].description);
-        // console.log('likes : ', response.data['products'][0].likes);
         if (products.length > 0) {
             console.log('we have ', products.length, ' products')
             showProducts(products)
@@ -52,11 +43,12 @@ function showProducts(products: any[]) {
                 <div class="picture"><img src="https://assignment-api.piton.com.tr${product.image}" alt=""></div>
                 <div class="title">${product.name}</div>
                 <div class="price">${product.price}.00 &euro;</div> 
-        `
-        productDiv.addEventListener('click', function () {
+      `
+        productsDiv.appendChild(productDiv)
+        let productImage:HTMLDivElement=<HTMLDivElement>document.querySelector(`#product-no-${product.id} .picture`)
+        productImage.addEventListener('click', function () {
             window.location.href = `product-details.html?id=${product.id}`;
         })
-        productsDiv.appendChild(productDiv)
     });
 }
 function like(id: number) {

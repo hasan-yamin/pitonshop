@@ -7,6 +7,11 @@
         justify-content: center;
         align-items: center;
 
+        @include breakpoint(xs) {
+            flex-direction: column;
+            gap: 30px;
+        }
+
         .info {
             display: flex;
             flex-direction: column;
@@ -17,6 +22,11 @@
             background: linear-gradient(180deg, $color2 0%, $color1 100%);
             color: white;
             height: 100vh;
+
+            @include breakpoint(xs) {
+                height: 200px;
+                width: 100%;
+            }
 
             h2 {
                 font-weight: bold;
@@ -36,6 +46,12 @@
             align-items: flex-start;
             padding-left: 60px;
             display: none;
+
+            @include breakpoint(xs) {
+                padding: 0;
+                align-items: center;
+                width: 100%;
+            }
 
             &.show {
                 display: flex;
@@ -63,12 +79,7 @@
 
                 @include breakpoint(xs) {
                     width: 65%;
-                }
-
-                @include breakpoint(sm) {
-                    width: 65%;
-                }
-
+                } 
                 .form-control {
                     display: flex;
                     justify-content: flex-start;
