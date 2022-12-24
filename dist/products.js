@@ -8,29 +8,32 @@ logOut.addEventListener('click', function () {
     // delete session data from local storage
     localStorage.removeItem('userAuth');
     localStorage.removeItem('tempUserAuth');
-    console.log('logedout...');
     window.location.href = "index.html";
 });
 /* *********** End Logout **************/
+/************** get all products from backend ***************/
 function getProducts() {
     axios({
         method: 'GET',
         url: 'https://assignment-api.piton.com.tr/api/v1/product/all',
-        // responseType: 'stream',
         headers: {
             'access-token': token
         }
     }).then(function (response) {
         products = response.data['products'];
         if (products.length > 0) {
-            console.log('we have ', products.length, ' products');
+            // send products to show to user
             showProducts(products);
         }
     });
 }
+/************** End get all products from backend ***************/
+/************** show all products to user ***************/
 function showProducts(products) {
+    // all products will be append to => 'productsDiv' 
     let productsDiv = document.getElementById('products');
-    products.forEach((product, index) => {
+    products.forEach((product) => {
+        //create container for each product
         let productDiv = document.createElement('div');
         productDiv.className = 'product';
         productDiv.setAttribute('id', `product-no-${product.id}`);
@@ -42,8 +45,9 @@ function showProducts(products) {
                 <div class="picture"><img src="https://assignment-api.piton.com.tr${product.image}" alt=""></div>
                 <div class="title">${product.name}</div>
                 <div class="price">${product.price}.00 &euro;</div> 
-      `;
+                `;
         productsDiv.appendChild(productDiv);
+        // when click on product image, will redirect to product details page
         let productImage = document.querySelector(`#product-no-${product.id} .picture`);
         productImage.addEventListener('click', function () {
             window.location.href = `product-details.html?id=${product.id}`;
@@ -51,8 +55,9 @@ function showProducts(products) {
         });
     });
 }
+/************** show all products to user ***************/
+/************** like and unlike functions ***************/
 function like(id) {
-    console.log('clicked on  : ', id);
     axios({
         method: 'POST',
         url: 'https://assignment-api.piton.com.tr/api/v1/product/like',
@@ -64,19 +69,18 @@ function like(id) {
             productId: id
         }
     }).then(function (response) {
-        console.log('response : ', response.data);
-        let likeIcon = document.querySelector(`#product-no-${id} .like`);
-        likeIcon.style.display = 'block';
-        let unlikeIcon = document.querySelector(`#product-no-${id} .unlike`);
-        unlikeIcon.style.display = 'none';
+        if (response.status === 200) {
+            let likeIcon = document.querySelector(`#product-no-${id} .like`);
+            likeIcon.style.display = 'block';
+            let unlikeIcon = document.querySelector(`#product-no-${id} .unlike`);
+            unlikeIcon.style.display = 'none';
+        }
     });
 }
 function unLike(id) {
-    console.log('clicked on  : ', id);
     axios({
         method: 'POST',
         url: 'https://assignment-api.piton.com.tr/api/v1/product/unlike',
-        // responseType: 'stream',
         headers: {
             'access-token': token
         },
@@ -84,15 +88,16 @@ function unLike(id) {
             productId: id
         }
     }).then(function (response) {
-        console.log('response : ', response.data);
-        let likeIcon = document.querySelector(`#product-no-${id} .like`);
-        likeIcon.style.display = 'none';
-        let unlikeIcon = document.querySelector(`#product-no-${id} .unlike`);
-        unlikeIcon.style.display = 'block';
+        if (response.status === 200) {
+            let likeIcon = document.querySelector(`#product-no-${id} .like`);
+            likeIcon.style.display = 'none';
+            let unlikeIcon = document.querySelector(`#product-no-${id} .unlike`);
+            unlikeIcon.style.display = 'block';
+        }
     });
 }
+/************** End like and unlike functions ***************/
 // remove temp UserAuth when close page
-window.addEventListener('beforeunload', (event) => {
-    console.log('beforeunload', event);
+window.addEventListener('beforeunload', () => {
     localStorage.removeItem('tempUserAuth');
 });
