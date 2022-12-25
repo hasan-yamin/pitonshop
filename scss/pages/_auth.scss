@@ -22,6 +22,8 @@
             background: linear-gradient(180deg, $color2 0%, $color1 100%);
             color: white;
             height: 100vh;
+            position: relative;
+            overflow: hidden;
 
             @include breakpoint(xs) {
                 height: 200px;
@@ -35,6 +37,30 @@
 
             p {
                 color: inherit;
+            }
+
+            .circle1,
+            .circle2 {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 500px;
+                height: 500px;
+                border-radius: 50%;
+                border: 1px solid $color2;
+
+                @include breakpoint(xs) {
+                    width: 150px;
+                    height: 150px;
+                }
+            }
+
+            .circle1 {
+                transform: translate(-50%, 40%);
+            }
+
+            .circle2 {
+                transform: translate(-30%, 50%);
             }
         }
 
